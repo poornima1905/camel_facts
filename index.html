@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camel Facts Mind Map</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsmind/0.4.0/jsmind.css" />
+    <title>Camel Facts</title>
     <style>
+        :root {
+            --background-color: #f4f4f4;
+            --container-background: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -18,66 +26,88 @@
         }
 
         .container {
-            max-width: 800px;
-            background: white;
+            max-width: 600px;
+            background: var(--container-background);
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
             text-align: center;
         }
 
-        #jsmind {
-            width: 100%;
-            height: 600px; /* Adjust height as needed */
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .fact-box {
+            background: #e2e2e2;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: none; /* Initially hidden */
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Camel Facts Mind Map</h1>
-        <div id="jsmind"></div>
+        <h1>15 Fun Facts About Camels</h1>
+        <div class="fact-box" id="fact-box">
+            <p id="fact-text"></p>
+        </div>
+        <button id="random-fact-button">Show Random Fact</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmind/0.4.0/jsmind.js"></script>
     <script>
-        const mind = {
-            "meta": {
-                "name": "camel_facts",
-                "author": "Your Name",
-                "version": "1.0"
-            },
-            "format": "node_tree",
-            "data": {
-                "id": "root",
-                "topic": "15 Fun Facts About Camels",
-                "children": [
-                    { "id": "fact1", "topic": "Two main species: Dromedary and Bactrian." },
-                    { "id": "fact2", "topic": "Humps store fat, not water." },
-                    { "id": "fact3", "topic": "Can drink up to 40 gallons of water." },
-                    { "id": "fact4", "topic": "Tolerate temperature fluctuations." },
-                    { "id": "fact5", "topic": "Thick fur insulates from heat." },
-                    { "id": "fact6", "topic": "Long eyelashes protect from sand." },
-                    { "id": "fact7", "topic": "Thick skin on knees for kneeling." },
-                    { "id": "fact8", "topic": "Social creatures living in caravans." },
-                    { "id": "fact9", "topic": "Wide, padded feet for walking on sand." },
-                    { "id": "fact10", "topic": "Herbivores, can eat thorny plants." },
-                    { "id": "fact11", "topic": "Can live 40-50 years in captivity." },
-                    { "id": "fact12", "topic": "Communicate through various sounds." },
-                    { "id": "fact13", "topic": "Can run up to 40 mph for short distances." },
-                    { "id": "fact14", "topic": "Known as 'ships of the desert'." },
-                    { "id": "fact15", "topic": "Camel milk is nutritious and staple food." }
-                ]
-            }
-        };
+        const facts = [
+            "There are two main species of camels: the Dromedary (one hump) and the Bactrian (two humps).",
+            "Contrary to popular belief, camels' humps do not store water. Instead, they store fat, which can be converted to energy when food is scarce.",
+            "Camels can drink up to 40 gallons of water in one go and can survive for weeks without water, depending on the temperature.",
+            "Camels can tolerate a body temperature fluctuation of up to 6 degrees Celsius (11 degrees Fahrenheit) to help conserve water.",
+            "The thick fur on a camel's body helps insulate them from the heat during the day and keeps them warm at night.",
+            "Camels have long eyelashes and a third eyelid that protects their eyes from sand and dust.",
+            "Camels have thick skin on their knees, which allows them to kneel comfortably on hot sand.",
+            "Camels are social creatures and often live in groups called caravans, which can consist of up to 30 camels.",
+            "Camels have wide, padded feet that help them walk on sand without sinking.",
+            "Camels are herbivores and can eat a variety of plants, including thorny ones, thanks to their tough mouths.",
+            "Camels can live for about 40 to 50 years in captivity.",
+            "Camels communicate through a variety of sounds, including grunts, groans, and bellows.",
+            "Camels can run at speeds of up to 40 miles per hour (64 km/h) for short distances.",
+            "In many cultures, camels are referred to as the 'ships of the desert' due to their ability to carry heavy loads across arid landscapes.",
+            "Camel milk is highly nutritious and is a staple food for many desert-dwelling communities. It contains less fat than cow's milk and is rich in vitamins and minerals."
+        ];
 
-        const options = {
-            container: 'jsmind',
-            editable: false,
-            theme: 'default'
-        };
+        const factBox = document.getElementById('fact-box');
+        const factText = document.getElementById('fact-text');
+        const randomFactButton = document.getElementById('random-fact-button');
 
-        const jm = new jsMind(options);
-        jm.show(mind);
+        // Function to display a random fact
+        function displayRandomFact() {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            factText.textContent = `🐪 ${randomFact}`; // Prepend camel emoji
+            factBox.style.display = 'block'; // Show the fact box
+        }
+
+        // Event listener for the button
+        randomFactButton.addEventListener('click', displayRandomFact);
     </script>
 </body>
 </html>
+

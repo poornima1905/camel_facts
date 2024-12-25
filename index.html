@@ -1,75 +1,118 @@
-:root {
-    --background-color: #f4f4f4;
-    --container-background: #ffffff;
-    --text-color: #333333;
-    --list-item-background: #e2e2e2;
-    --border-radius: 8px;
-    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camel Facts</title>
+    <style>
+        :root {
+            --background-color: #f4f4f4;
+            --container-background: #ffffff;
+            --text-color: #333333;
+            --list-item-background: #e2e2e2;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background-color);
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-.container {
-    max-width: 600px;
-    background: var(--container-background);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
-}
+        .container {
+            max-width: 600px;
+            background: var(--container-background);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
 
-.container:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-}
+        .container:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
 
-h1 {
-    text-align: center;
-    color: var(--text-color);
-    margin-bottom: 20px;
-}
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-li {
-    background: var(--list-item-background);
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    transition: var(--transition);
-}
+        li {
+            background: var(--list-item-background);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
 
-li:hover {
-    background: #d1d1d1;
-    transform: translateY(-2px);
-}
+        li:hover {
+            background: #d1d1d1;
+            transform: translateY(-2px);
+        }
 
-@media (max-width: 600px) {
-    body {
-        padding: 10px;
-    }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
 
-    .container {
-        padding: 15px;
-    }
+            .container {
+                padding: 15px;
+            }
 
-    h1 {
-        font-size: 1.5em;
-    }
+            h1 {
+                font-size: 1.5em;
+            }
 
-    li {
-        padding: 10px;
-    }
-}
+            li {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>15 Fun Facts About Camels</h1>
+        <ul id="facts-list"></ul>
+    </div>
+    <script>
+        const facts = [
+            "There are two main species of camels: the Dromedary (one hump) and the Bactrian (two humps).",
+            "Contrary to popular belief, camels' humps do not store water. Instead, they store fat, which can be converted to energy when food is scarce.",
+            "Camels can drink up to 40 gallons of water in one go and can survive for weeks without water, depending on the temperature.",
+            "Camels can tolerate a body temperature fluctuation of up to 6 degrees Celsius (11 degrees Fahrenheit) to help conserve water.",
+            "The thick fur on a camel's body helps insulate them from the heat during the day and keeps them warm at night.",
+            "Camels have long eyelashes and a third eyelid that protects their eyes from sand and dust.",
+            "Camels have thick skin on their knees, which allows them to kneel comfortably on hot sand.",
+            "Camels are social creatures and often live in groups called caravans, which can consist of up to 30 camels.",
+            "Camels have wide, padded feet that help them walk on sand without sinking.",
+            "Camels are herbivores and can eat a variety of plants, including thorny ones, thanks to their tough mouths.",
+            "Camels can live for about 40 to 50 years in captivity.",
+            "Camels communicate through a variety of sounds, including grunts, groans, and bellows.",
+            "Camels can run at speeds of up to 40 miles per hour (64 km/h) for short distances.",
+            "In many cultures, camels are referred to as the 'ships of the desert' due to their ability to carry heavy loads across arid landscapes.",
+            "Camel milk is highly nutritious and is a staple food for many desert-dwelling communities. It contains less fat than cow's milk and is rich in vitamins and minerals."
+        ];
+
+        const factsList = document.getElementById('facts-list');
+
+        facts.forEach(fact => {
+            const li = document.createElement('li');
+            li.textContent = fact;
+            factsList.appendChild(li);
+        });
+    </script>
+</body>
+</html>

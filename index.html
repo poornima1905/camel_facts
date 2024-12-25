@@ -141,7 +141,7 @@
         const factsList = document.getElementById('facts-list');
         const changeFactButton = document.getElementById('change-fact-button');
 
-        // Function to display a random fact
+        // Function to display a random fact with camel symbol
         function displayRandomFact() {
             // Clear the current facts
             factsList.innerHTML = '';
@@ -151,7 +151,7 @@
 
             // Create a list item for the random fact
             const li = document.createElement('li');
-            li.textContent = randomFact;
+            li.textContent = `🐪 ${randomFact}`; // Prepend camel emoji
 
             // Assign a random shape
             const shapeClass = ['circle', 'square', 'rounded-rectangle'][Math.floor(Math.random() * 3)];

@@ -40,12 +40,6 @@
             margin-bottom: 20px;
         }
 
-        .random-fact {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
         ul {
             list-style-type: none;
             padding: 0;
@@ -99,6 +93,45 @@
             background-color: #45a049;
         }
 
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -122,10 +155,18 @@
 <body>
     <div class="container">
         <h1>15 Fun Facts About Camels</h1>
-        <div class="random-fact" id="random-fact-display">🐪 Click the button to see a random fact!</div>
         <ul id="facts-list"></ul>
         <button id="random-fact-button">Show Random Fact</button>
     </div>
+
+    <!-- Modal -->
+    <div id="factModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="random-fact-text"></p>
+        </div>
+    </div>
+
     <script>
         const facts = [
             "There are two main species of camels: the Dromedary (one hump) and the Bactrian (two humps).",
@@ -145,21 +186,33 @@
             "Camel milk is highly nutritious and is a staple food for many desert-dwelling communities. It contains less fat than cow's milk and is rich in vitamins and minerals."
         ];
 
-        const randomFactDisplay = document.getElementById('random-fact-display');
-        const randomFactButton = document.getElementById('random-fact-button');
         const factsList = document.getElementById('facts-list');
+        const randomFactButton = document.getElementById('random-fact-button');
+        const modal = document.getElementById("factModal");
+        const span = document.getElementsByClassName("close")[0];
+        const randomFactText = document.getElementById("random-fact-text");
 
-        // Function to display a random fact
+        // Function to display a random fact in the modal
         function displayRandomFact() {
             const randomFact = facts[Math.floor(Math.random() * facts.length)];
-            randomFactDisplay.textContent = `🐪 ${randomFact}`; // Prepend camel emoji
+            randomFactText.innerHTML = `<strong>🐪 ${randomFact}</strong>`; // Prepend camel emoji and make text bold
+            modal.style.display = "block"; // Show the modal
         }
 
-        // Initial display of a random fact
-        displayRandomFact();
-
-        // Change fact on button click
+        // Event listener for the button
         randomFactButton.addEventListener('click', displayRandomFact);
+
+        // Close the modal when the user clicks on <span> (x)
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
         // Initial display of facts
         facts.forEach((fact, index) => {

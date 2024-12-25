@@ -32,10 +32,10 @@
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             transition: var(--transition);
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: var(--text-color);
             margin-bottom: 20px;
         }
@@ -77,6 +77,22 @@
             transform: translateY(-2px);
         }
 
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -101,6 +117,7 @@
     <div class="container">
         <h1>15 Fun Facts About Camels</h1>
         <ul id="facts-list"></ul>
+        <button id="change-fact-button">Change Fact</button>
     </div>
     <script>
         const facts = [
@@ -122,22 +139,33 @@
         ];
 
         const factsList = document.getElementById('facts-list');
+        const changeFactButton = document.getElementById('change-fact-button');
 
-        facts.forEach((fact, index) => {
+        // Function to display a random fact
+        function displayRandomFact() {
+            // Clear the current facts
+            factsList.innerHTML = '';
+
+            // Get a random fact
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+
+            // Create a list item for the random fact
             const li = document.createElement('li');
-            li.textContent = fact;
+            li.textContent = randomFact;
 
-            // Assign different shapes based on index
-            if (index % 3 === 0) {
-                li.classList.add('circle');
-            } else if (index % 3 === 1) {
-                li.classList.add('square');
-            } else {
-                li.classList.add('rounded-rectangle');
-            }
+            // Assign a random shape
+            const shapeClass = ['circle', 'square', 'rounded-rectangle'][Math.floor(Math.random() * 3)];
+            li.classList.add(shapeClass);
 
+            // Append the list item to the facts list
             factsList.appendChild(li);
-        });
+        }
+
+        // Initial display of a random fact
+        displayRandomFact();
+
+        // Change fact on button click
+        changeFactButton.addEventListener('click', displayRandomFact);
     </script>
 </body>
 </html>
